@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>フィックスターズSC16報告会</title>
+
+		<meta name="description" content="フィックスターズSC16報告会" />
+		<meta name="author" content="YOSHIFUJI Naoki" />
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+		<link rel="stylesheet" href="css/reveal.css" />
+		<link rel="stylesheet" href="css/theme/fixstars.css" id="theme" />
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	
+		<link rel="stylesheet" href="main.css" />
+	</head>
+
+	<body>
+		<div class="reveal">
+			<svg id="slide_number_background" style="position: absolute; top: 2px; right: 2px; width: 2.2em;" viewBox="0 0 100 150">
+				<polygon
+					points="0,0 100,0 100,80 50,120 0,80"
+					fill="#0070c0" />
+			</svg>
+			<div class="slides">
+				<!-- タイトルページ -->
+				<section>
+					<h1>フィックスターズSC16報告会</h1>
+					<p id="attribution">ソリューション第二事業部 &#x20bb7;藤尚生</p>
+					<time pubdate="">2016-12-19</time>
+					<p id="place">＠フィックスターズ大崎本社</p>
+				</section>
+
+				<section>
+					<section>
+						<h3>注意</h3>
+						<p>今日の内容は、一部を除いて<br />発表者個人の考えに基づきます。</p>
+						<p>共著者や会社の総意ではありません。</p>
+					</section>
+				</section>
+				
+				<!-- 以下に各スライドを記述してください -->
+				<section id="toc">
+					<h3>今日の内容</h3>
+					<ol class="toc">
+						<li>SC16ワークショップで発表した内容</li>
+						<li>背景とか成果とか詳しく</li>
+						<li>今期のHPCGの結果について</li>
+						<li>今後の展望</li>
+					</ol>
+				</section>
+				
+				<section>
+					<h2>SC16ワークショップで発表した内容</h2>
+					<section class="toc">
+						<h3>今日の内容</h3>
+						<ol class="toc">
+							<li class="recent">SC16ワークショップで発表した内容</li>
+							<li>背景とか成果とか詳しく</li>
+							<li>今期のHPCGの結果について</li>
+							<li>今後の展望</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>概要</h3>
+						<dl style="font-size: 70%">
+							<dt>題名</dt>
+							<dd class="fragment">Implementation and evaluation of data-compression algorithms for irregular-grid iterative methods on the PEZY-SC processor</dd>
+							<dd class="fragment">（参考和訳：非正規格子反復法向けデータ圧縮アルゴリズムのPEZY-SCプロセッサーにおける実装と評価）</dd>
+							<dt>著者</dt>
+							<dd><ul>
+								<li class="fragment">Naoki Yoshifuji (Fixstars)</li>
+								<li class="fragment">Ryo Sakamoto (Fixstars, present: PEZY Computing)</li>
+								<li class="fragment">Keigo Nitadori (RIKEN AICS）</li>
+								<li class="fragment">Jun Makino (Department of Planetology, Kobe University)</li>
+							</ul></dd>
+							<dt>投稿先ワークショップ</dt>
+							<dd class="fragment"><a href="http://sc16.supercomputing.org/presentation/?id=wksp132&sess=sess127">IA<sup>3</sup> 2016 - 6th Workshop on Irregular Applications: Architectures and Algorithms</a></dd>
+						</dl>
+					</section>
+
+					<section>
+						<h3>論文＆資料の場所</h3>
+						<dl style="font-size: 90%">
+							<dt>ワークショップ論文（4ページ）</dt>
+							<dd class="fragment"><a href="http://dx.doi.org/10.1109/IA3.2016.15">DOI 10.1109/IA3.2016.15</a></dd>
+							<dt>arXiv論文（7ページ）</dt>
+							<dd class="fragment"><a href="https://arxiv.org/abs/1612.00530">arXiv:1612.00530</a></dd>
+							<dt>発表資料</dt>
+							<dd class="fragment"><a href="https://fixstars.github.io/sc16workshop/presentation/">fixstars.github.io/sc16workshop/presentation/</a></dd>
+						</dl>
+						<p>※いずれも英語です</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>背景とか成果とか詳しく</h2>
+					<section>
+						<h3>今日の内容</h3>
+						<ol class="toc">
+							<li>SC16ワークショップで発表した内容</li>
+							<li class="recent">背景とか成果とか詳しく</li>
+							<li>今期のHPCGの結果について</li>
+							<li>今後の展望</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>個人的に思うこと</h3>
+						<p style="font-size: 300%">この世界は<br />疎結合である</p>
+					</section>
+					
+					<section>
+						<h3>疎結合？</h3>
+						<div>
+							<figure class="fragment" style="width: 49%; float: left">
+								<svg viewBox="0 00 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									<line x1="10" y1="10" x2="41" y2="11" stroke="blue" />
+									<line x1="10" y1="10" x2="87" y2="69" stroke="blue" />
+									<line x1="10" y1="10" x2="51" y2="87" stroke="blue" />
+									<line x1="10" y1="10" x2="89" y2="21" stroke="blue" />
+									<line x1="10" y1="10" x2="73" y2="47" stroke="blue" />
+									<line x1="10" y1="10" x2="15" y2="89" stroke="blue" />
+									<line x1="10" y1="10" x2="47" y2="42" stroke="blue" />
+
+									<line x1="41" y1="11" x2="87" y2="69" stroke="blue" />
+									<line x1="41" y1="11" x2="51" y2="87" stroke="blue" />
+									<line x1="41" y1="11" x2="89" y2="21" stroke="blue" />
+									<line x1="41" y1="11" x2="73" y2="47" stroke="blue" />
+									<line x1="41" y1="11" x2="15" y2="89" stroke="blue" />
+									<line x1="41" y1="11" x2="47" y2="42" stroke="blue" />
+
+									<line x1="87" y1="69" x2="51" y2="87" stroke="blue" />
+									<line x1="87" y1="69" x2="89" y2="21" stroke="blue" />
+									<line x1="87" y1="69" x2="73" y2="47" stroke="blue" />
+									<line x1="87" y1="69" x2="15" y2="89" stroke="blue" />
+									<line x1="87" y1="69" x2="47" y2="42" stroke="blue" />
+
+									<line x1="87" y1="69" x2="51" y2="87" stroke="blue" />
+									<line x1="87" y1="69" x2="89" y2="21" stroke="blue" />
+									<line x1="87" y1="69" x2="73" y2="47" stroke="blue" />
+									<line x1="87" y1="69" x2="15" y2="89" stroke="blue" />
+									<line x1="87" y1="69" x2="47" y2="42" stroke="blue" />
+
+									<line x1="51" y1="87" x2="89" y2="21" stroke="blue" />
+									<line x1="51" y1="87" x2="73" y2="47" stroke="blue" />
+									<line x1="51" y1="87" x2="15" y2="89" stroke="blue" />
+									<line x1="51" y1="87" x2="47" y2="42" stroke="blue" />
+
+									<line x1="89" y1="21" x2="73" y2="47" stroke="blue" />
+									<line x1="89" y1="21" x2="15" y2="89" stroke="blue" />
+									<line x1="89" y1="21" x2="47" y2="42" stroke="blue" />
+
+									<line x1="73" y1="47" x2="15" y2="89" stroke="blue" />
+									<line x1="73" y1="47" x2="47" y2="42" stroke="blue" />
+
+									<line x1="15" y1="89" x2="47" y2="42" stroke="blue" />
+
+									<circle cx="10" cy="10" r="5" fill="black" />
+									<circle cx="41" cy="11" r="5" fill="black" />
+									<circle cx="87" cy="69" r="5" fill="black" />
+									<circle cx="51" cy="87" r="5" fill="black" />
+									<circle cx="89" cy="21" r="5" fill="black" />
+									<circle cx="73" cy="47" r="5" fill="black" />
+									<circle cx="15" cy="89" r="5" fill="black" />
+									<circle cx="47" cy="42" r="5" fill="black" />
+								</svg>
+								<figcaption>密結合</figcaption>
+							</figure>
+							<figure class="fragment" style="width: 49%; float: right">
+								<svg viewBox="0 00 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									<line x1="10" y1="10" x2="41" y2="11" stroke="blue" />
+									<line x1="10" y1="10" x2="47" y2="42" stroke="blue" />
+									<line x1="10" y1="10" x2="15" y2="89" stroke="blue" />
+
+									<line x1="41" y1="11" x2="73" y2="47" stroke="blue" />
+									<line x1="41" y1="11" x2="89" y2="21" stroke="blue" />
+									<line x1="41" y1="11" x2="47" y2="42" stroke="blue" />
+
+									<line x1="87" y1="69" x2="51" y2="87" stroke="blue" />
+									<line x1="87" y1="69" x2="89" y2="21" stroke="blue" />
+									<line x1="87" y1="69" x2="73" y2="47" stroke="blue" />
+
+									<line x1="51" y1="87" x2="73" y2="47" stroke="blue" />
+									<line x1="51" y1="87" x2="15" y2="89" stroke="blue" />
+									<line x1="51" y1="87" x2="47" y2="42" stroke="blue" />
+
+									<line x1="89" y1="21" x2="73" y2="47" stroke="blue" />
+									<line x1="89" y1="21" x2="47" y2="42" stroke="blue" />
+
+									<line x1="73" y1="47" x2="47" y2="42" stroke="blue" />
+
+									<line x1="15" y1="89" x2="47" y2="42" stroke="blue" />
+
+									<circle cx="10" cy="10" r="5" fill="black" />
+									<circle cx="41" cy="11" r="5" fill="black" />
+									<circle cx="87" cy="69" r="5" fill="black" />
+									<circle cx="51" cy="87" r="5" fill="black" />
+									<circle cx="89" cy="21" r="5" fill="black" />
+									<circle cx="73" cy="47" r="5" fill="black" />
+									<circle cx="15" cy="89" r="5" fill="black" />
+									<circle cx="47" cy="42" r="5" fill="black" />
+								</svg>
+								<figcaption>疎結合</figcaption>
+							</figure>
+						</div>
+					</section>
+
+					<section>
+						<h3>行列で書き直すと</h3>
+						<div>
+							<table class="fragment" style="width: 49%; float: left; font-size: 50%">
+								<caption>密結合</caption>
+								<tbody>
+									<tr><td>1.2</td><td>6.8</td><td>7.6</td><td>8.7</td><td>4.0</td><td>2.7</td><td>9.6</td><td>7.8</td></tr>
+									<tr><td>5.4</td><td>0.3</td><td>2.9</td><td>8.5</td><td>5.9</td><td>8.4</td><td>2.9</td><td>6.9</td></tr>
+									<tr><td>7.1</td><td>4.9</td><td>5.6</td><td>5.2</td><td>0.3</td><td>0.6</td><td>2.5</td><td>8.2</td></tr>
+									<tr><td>9.8</td><td>8.1</td><td>4.5</td><td>1.6</td><td>9.1</td><td>5.9</td><td>0.1</td><td>1.5</td></tr>
+									<tr><td>1.5</td><td>3.0</td><td>2.6</td><td>7.5</td><td>0.7</td><td>6.7</td><td>4.7</td><td>0.3</td></tr>
+									<tr><td>9.3</td><td>1.5</td><td>8.1</td><td>9.5</td><td>1.0</td><td>0.8</td><td>4.8</td><td>3.1</td></tr>
+									<tr><td>5.6</td><td>8.2</td><td>3.9</td><td>8.3</td><td>3.2</td><td>1.5</td><td>5.5</td><td>5.8</td></tr>
+									<tr><td>2.0</td><td>2.3</td><td>6.4</td><td>5.0</td><td>3.1</td><td>0.3</td><td>9.2</td><td>0.2</td></tr>
+								</tbody>
+							</table>
+							<table class="fragment" style="width: 49%; float: right; font-size: 50%">
+								<caption>疎結合</caption>
+								<tbody>
+									<tr><td>1.2</td><td>6.8</td><td>   </td><td>8.7</td><td>   </td><td>2.7</td><td>   </td><td>   </td></tr>
+									<tr><td>5.4</td><td>0.3</td><td>2.9</td><td>8.5</td><td>5.9</td><td>   </td><td>   </td><td>   </td></tr>
+									<tr><td>   </td><td>4.9</td><td>5.6</td><td>5.2</td><td>0.3</td><td>   </td><td>   </td><td>   </td></tr>
+									<tr><td>9.8</td><td>8.1</td><td>4.5</td><td>1.6</td><td>9.1</td><td>5.9</td><td>0.1</td><td>   </td></tr>
+									<tr><td>   </td><td>3.0</td><td>2.6</td><td>7.5</td><td>0.7</td><td>   </td><td>4.7</td><td>0.3</td></tr>
+									<tr><td>9.3</td><td>   </td><td>   </td><td>9.5</td><td>   </td><td>0.8</td><td>4.8</td><td>   </td></tr>
+									<tr><td>   </td><td>   </td><td>   </td><td>8.3</td><td>3.2</td><td>1.5</td><td>5.5</td><td>5.8</td></tr>
+									<tr><td>   </td><td>   </td><td>6.4</td><td>   </td><td>3.1</td><td>   </td><td>9.2</td><td>0.2</td></tr>
+								</tbody>
+							</table>
+						</div>
+						<p class="fragment">※値＝各要素間の相互作用の強さ</p>
+					</section>
+
+					<section>
+						<h3>相互作用を計算するには？</h3>
+						<p class="fragment">相互作用量＝要素感の重み×相手の強さ</p>
+						<p class="fragment">合計＝Σ要素感の重み×相手の強さ</p>
+						<p class="fragment">→ \(y = Ax\)の形に直せる</p>
+						<p class="fragment" style="font-size: 200%"><strong>疎行列・ベクトル積(SpMV)</strong></p>
+					</section>
+					
+					<section>
+						<h3>つまり？</h3>
+						<p class="fragment" style="font-size: 150%">世界を加速させるには <br /> <strong>SpMVが速い</strong>のが良い！</p>
+						<p class="fragment"><small>※例外：重力多体問題＆ニューラルネットワーク</small></p>
+					</section>
+					
+					<section>
+						<h3>SpMVはなぜ遅い？</h3>
+						<p class="fragment" style="font-size:220%" ><strong>メモリ帯域</strong>が遅すぎる<br /><small>（演算速度に対して）</small></p>
+					</section>
+					
+					<section>
+						<h3>どういうこと？ (0)</h3>
+						<p>疎行列の表現方法</p>
+						<table class="matrix">
+							<thead>
+								<tr><th colspan="11" rowspan="2">疎行列</th>                                                                                            <td>  </td> <th colspan="13">ELL形式</th></tr>
+								<tr>                                                                                                                                    <td>  </td> <th colspan="5"><strong>値</strong></th>                                  <td> </td> <th colspan="5"><strong>列番号</strong></th>                        <td> </td> <th><strong>非ゼロ数</strong></th></tr>
+							</thead>
+							<tbody>
+								<tr><td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>26</td> <td>-1</td> <td> 1</td> <td>  </td> <td>  </td> <td> </td> <td>0</td> <td>1</td> <td>3</td>  <td>  </td> <td>  </td> <td> </td> <td>3</td> </tr>
+								<tr><td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td>  </td> <td> </td> <td>0</td> <td>1</td> <td>2</td>  <td>4</td>  <td>  </td> <td> </td> <td>4</td> </tr>
+								<tr><td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td>  </td> <td> </td> <td>1</td> <td>2</td> <td>3</td>  <td>5</td>  <td>  </td> <td> </td> <td>4</td> </tr>
+								<tr><td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td> </td> <td>0</td> <td>2</td> <td>3</td>  <td>4</td>  <td>6</td>  <td> </td> <td>5</td> </tr>
+								<tr><td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td> </td> <td>1</td> <td>3</td> <td>4</td>  <td>5</td>  <td>7</td>  <td> </td> <td>5</td> </tr>
+								<tr><td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td>→</td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td>,</td> <td>2</td> <td>4</td> <td>5</td>  <td>6</td>  <td>8</td>  <td>,</td> <td>5</td> </tr>
+								<tr><td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td> </td> <td>3</td> <td>5</td> <td>6</td>  <td>7</td>  <td>9</td>  <td> </td> <td>5</td> </tr>
+								<tr><td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td> 1</td> <td> </td> <td>4</td> <td>6</td> <td>7</td>  <td>8</td>  <td>1 </td> <td> </td> <td>5</td> </tr>
+								<tr><td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> </td> <td>5</td> <td>7</td> <td>8</td>  <td>9</td>  <td>  </td> <td> </td> <td>4</td> </tr>
+								<tr><td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>-1</td> <td>  </td> <td> </td> <td>6</td> <td>8</td> <td>9</td>  <td>1 </td> <td>  </td> <td> </td> <td>4</td> </tr>
+								<tr><td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td> 1</td> <td>  </td> <td>-1</td> <td>26</td> <td>  </td> <td> 1</td> <td>-1</td> <td>26</td> <td>  </td> <td>  </td> <td> </td> <td>7</td> <td>9</td> <td>1 </td> <td>  </td> <td>  </td> <td> </td> <td>3</td> </tr>
+							</tbody>
+						</table>
+						<p class="fragment">右側<strong>全てを読む必要</strong>がある</p>
+					</section>
+
+					<section>
+						<h3>どういうこと？ (1)</h3>
+						<p>SpMVで、メモリから<strong>読む量</strong></p>
+						<table>
+							<thead>
+								<tr><th>種類</th><th>1要素[byte]</th><th>個数</th></tr>
+							</thead>
+							<tbody>
+								<tr><td>値</td><td class="fragment">8</td><td class="fragment">合計非ゼロ数(nm)</td></tr>
+								<tr><td>列番号</td><td class="fragment">4</td><td class="fragment">合計非ゼロ数(nm)</td></tr>
+								<tr><td>非ゼロ数</td><td class="fragment">4</td><td class="fragment">行数(n)</td></tr>
+								<tr><td>ベクトル</td><td class="fragment">8</td><td class="fragment">行数(n)</td></tr>
+							</tbody>
+						</table>
+						<p>n：行数、m：平均非ゼロ数</p>
+						<p class="fragment">∴ <strong>\(12n(m+1)\) [byte]</strong></p>
+					</section>
+
+					<section>
+						<h3>どういうこと？ (2)</h3>
+						<p>SpMVの<strong>演算量</strong></p>
+						<p class="fragment">\[ y_i = \underbrace{a_{i0} \times x_0 + a_{i2} \times x_2 + ...}_{m個} \]</p>
+						<table>
+							<thead>
+								<tr><th>種類</th><th>1行あたり[flop]</th><th>合計[flop]</th></tr>
+							</thead>
+							<tbody>
+								<tr class="fragment"><td>×</td><td>m</td><td>nm</td></tr>
+								<tr class="fragment"><td>＋</td><td>m-1</td><td>n(m-1)</td></tr>
+							</tbody>
+						</table>
+						<p>n：行数、m：平均非ゼロ数</p>
+						<p class="fragment">∴ <strong>\(n(2m-1)\) [flop]</strong></p>
+					</section>
+
+					<section>
+						<h3>どういうこと？ (3)</h3>
+						<ul>
+							<li>読む量：\(12n(m+1)\) [byte]</li>
+							<li>演算量：\(n(2m-1)\) [flop]</li>
+						</ul>
+						<p class="fragment">→\(6 \frac{1+1/m}{1+0.5/m}\) [byte/flop]</p>
+						<p class="fragment" style="font-size: 200%">≒<strong>6 [byte/flop]</strong> <br /><small>※平均非ゼロ数は1より十分に大きい</small></p>
+					</section>
+
+					<section>
+						<h3>どういうこと？ (4)</h3>
+						<p class="fragment" style="font-size: 150%">Q. SpMV<small>(6[byte/flop])</small>の計算で <br/> PEZY最高性能<small>(1.5[TFLOP/s])</small>を出すには？</p>
+						<br />
+						<p class="fragment" style="font-size: 150%">A. 6 × 1.5 = <strong>9[TB/s]</strong>読む必要</p>
+					</section>
+
+					<section>
+						<h3>どういうこと？ (5)</h3>
+						<table>
+							<caption>最近のメモリ性能<br />（1チップあたり）</caption>
+							<thead>
+								<tr><th>種類</th><th>TB/s</th></tr>
+							</thead>
+							<tbody>
+								<tr class="fragment" ><td>DDR4</th><td>0.025</td></tr>
+								<tr class="fragment" ><td>GDDR5</th><td>0.100</td></tr>
+								<tr class="fragment" ><td>HBM2</th><td>0.256</td></tr>
+								<tr class="fragment" ><td>HMC2</th><td>0.480</td></tr>
+								<tr class="fragment" ><td>SpMVに必要なのは？</td><td>9.000</td></tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<h3>現状認識</h3>
+						<p style="font-size: 200%">今の計算機でSpMVを<br />素直に速くするのは<br /><strong class="fragment" style="font-size: 150%">無理！！</strong></p>
+					</section>
+
+					<section>
+						<h3>ということで</h3>
+						<p style="font-size: 200%">疎行列の読む<br /><strong>データ量を減らす</strong>手法<br />を提案した</p>
+					</section>
+
+					<section>
+						<h3>どれぐらい減る？</h3>
+						<p>HPCGベンチマークの場合</p>
+						<dl>
+							<dt>なにもしない</dt>
+							<dd class="fragment">336[byte/行]</dd>
+							<dt>提案手法</dt>
+							<dd class="fragment">13[byte/行]</dd>
+						</dl>
+						<div class="fragment" style="font-size: 160%">
+							<p>理論的には約<strong>26倍の高速化</strong>！</p>
+							<p><small>※実測値は約3倍</small></p>
+						</div>
+					</section>
+				</section>
+
+
+				<section>
+					<h2>今期のHPCGの結果について</h2>
+					<section class="toc">
+						<h3>今日の内容</h3>
+						<ol class="toc">
+							<li>SC16ワークショップで発表した内容</li>
+							<li>背景とか成果とか詳しく</li>
+							<li class="recent">今期のHPCGの結果について</li>
+							<li>今後の展望</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>HPCGとは</h3>
+						<dl>
+							<dt class="fragment">前章で述べたこと</dt>
+							<dd class="fragment">世界は疎結合だ</dd>
+							<dt class="fragment">そんな世界の工学的な問題</dt>
+							<dd class="fragment">疎行列の線形一次方程式</dd>
+						</dl>
+						<p class="fragment"><strong>疎行列の線形一次方程式を速く解いたら勝ち</strong></p>
+					</section>
+
+					<section>
+						<h3>注意</h3>
+						<p>HPCGの専門家じゃないので<br />感想しか書いてません</p>
+						<p>（みなさん議論しましょう！）</p>
+					</section>
+
+					<section>
+						<h3>2016年11月期の結果</h3>
+						<table>
+							<thead>
+								<tr><th>位</th><th>名称</th><th>TFLOP/s</th></tr>
+							</thead>
+							<tbody>
+								<tr><th>1</th><td class="text">京</td><td>603</td></tr>
+								<tr><th>2</th><td class="text">天河2</td><td>580</td></tr>
+								<tr><th>3</th><td class="text">Oakforest-PACS</td><td>396</td></tr>
+								<tr><th>4</th><td class="text">神威太湖之光</td><td>371</td></tr>
+								<tr><th>5</th><td class="text">Cori</td><td>355</td></tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<h3>祝</h3>
+						<p>京＆Oakforest-PACSおめでとうございます！</p>
+					</section>
+
+					<section>
+						<h3>アーキテクチャ＆コア数</h3>
+						<table>
+							<thead>
+								<tr><th>位</th><th>名称</th><th>アーキ</th><th>コア数</th></tr>
+							</thead>
+							<tbody>
+								<tr><th>1</th><td class="text">京</td><td>SPARC</td><td>705k</td></tr>
+								<tr><th>2</th><td class="text">天河2</td><td>KNC</td><td><strong>3120k</strong></td></tr>
+								<tr><th>3</th><td class="text">Oakforest-PACS</td><td>KNL</td><td>557k</td></tr>
+								<tr><th>4</th><td class="text">神威太湖之光</td><td>SW26010</td><td><strong>10650k</strong></td></tr>
+								<tr><th>5</th><td class="text">Cori</td><td>KNL</td><td>632k</td></tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<h3>全体的な感想</h3>
+						<ul>
+							<li>物量で殴る（天河2、神威太湖之光）</li>
+							<li>B/Fを上げる（京、KNL）</li>
+						</ul>
+						<p>しかないのでは？</p>
+					</section>
+
+					<section>
+						<h3>個別の感想</h3>
+						<dl>
+							<dt class="fragment">京</dt>
+							<dd class="fragment">前回からさらに約10%高速化されてる</dd>
+							<dt class="fragment">天河2</dt>
+							<dd class="fragment">高速化やってたけど間に合わなかったらしい（BoFで担当者が言ってた）。</dd>
+							<dt class="fragment">Oakforest-PACS、Cori</dt>
+							<dd class="fragment">MCDRAM強いんだなぁ</dd>
+							<dt class="fragment">神威太湖之光</dt>
+							<dd class="fragment">Top500の性能にしては低いので頑張って欲しい</dd>
+						</dl>
+					</section>
+				</section>
+
+				<section>
+					<section class="toc">
+						<h3>今日の内容</h3>
+						<ol class="toc">
+							<li>SC16ワークショップで発表した内容</li>
+							<li>背景とか成果とか詳しく</li>
+							<li>今期のHPCGの結果について</li>
+							<li class="recent">今後の展望</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3>今後のこと</h3>
+						<ul>
+							<li>行列の圧縮を他のアーキテクチャに適用する</li>
+							<li>PEZYの最大規模スパコンShoubuで計測する</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>募集</h3>
+						<p>フィックスターズは、HPCもそれ以外でも<br />「高速化」が得意です。</p>
+						<dl>
+							<dt class="fragment">手元のこのプログラム速くならないかな？</dt>
+							<dd class="fragment">→<a href="http://www.fixstars.com/ja/contact/">ご相談ください</a></dd>
+							<dt class="fragment">高速化の仕事たのしそう！</dt>
+							<dd class="fragment">→<a href="http://www.fixstars.com/recruit/ja/category/">一緒に働きましょう！</a></dd>
+						</dl>
+					</section>
+
+					<section>
+						<div style="font-size: 400%; margin: auto">return 0;</div>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: "h.v",
+
+				width: 960,
+				height: 720,
+				margin: 0,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
